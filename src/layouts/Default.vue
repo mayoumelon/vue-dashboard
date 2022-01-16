@@ -4,7 +4,6 @@ import { MenuIcon, MoonIcon, SunIcon } from '@heroicons/vue/outline';
 import { debounce } from 'lodash';
 import DropdownMenu from './DropdownMenu.vue';
 import Sidebar from '../components/Sidebar.vue';
-import List from '../components/'
 
 const innerWidth = ref(window.innerWidth);
 const show = ref(innerWidth.value >= 1280 ? true : false);

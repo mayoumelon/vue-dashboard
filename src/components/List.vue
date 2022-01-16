@@ -1,5 +1,6 @@
 <script setup>
 import { reactive } from 'vue';
+import { TemplateIcon, ShoppingCartIcon } from '@heroicons/vue/outline';
 
 const lists = reactive([
   {
@@ -9,7 +10,7 @@ const lists = reactive([
   },
   {
     name: 'EC',
-    icon: 'ShoppingIcon',
+    icon: 'ShoppingCartIcon',
     link: '/#',
     sublists: [
       {
@@ -23,11 +24,17 @@ const lists = reactive([
     ],
   },
 ]);
+
+const icons = {
+  TemplateIcon: TemplateIcon,
+  ShoppingCartIcon: ShoppingCartIcon,
+};
 </script>
 <template>
   <ul class="text-gray-700">
     <li class="mb-1" v-for="list in lists" :key="list.name">
-      <a :href="list.link" class="block p-2 rounded-sm hover:text-white hover:bg-blue-400">
+      <a :href="list.link" class="flex items-center block p-2 rounded-sm hover:text-white hover:bg-blue-400">
+        <component :is="icons[list.icon]" class="w-6 h-6 mr-2"></component>
         <span>{{ list.name }}</span>
       </a>
     </li>
