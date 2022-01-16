@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 import { MenuIcon, MoonIcon, SunIcon } from '@heroicons/vue/outline';
 import { debounce } from 'lodash';
+import DropdownMenu from './DropdownMenu.vue';
 
 const innerWidth = ref(window.innerWidth);
 const show = ref(innerWidth.value >= 1280 ? true : false);
@@ -63,18 +64,21 @@ onUnmounted(() => {
         class="fixed xl:hidden inset-0 bg-gray-900 opacity-50 z-10"
         @click="show = !show"
         v-show="show"
-        ></div>
+      ></div>
       <div class="bg-gray-100 dark:bg-gray-900 h-screen overflow-hidden transition duration-300" :class="{ 'xl:pl-64': show }">
           <div class="flex items-center justify-between bg-white dark:bg-gray-800 rounded shadow m-4 p-4">
               <MenuIcon class="h-6 w-6 text-gray-600 dark:text-gray-300 cursor-pointer" @click="show = !show" />
-              <MoonIcon class="w-7 h-7 text-gray-600 cursor-pointer"
-                @click="changeMode('dark')"
-                v-if="theme === 'light'"
-              />
-              <SunIcon class="w-7 h-7 text-gray-300 cursor-pointer"
-                @click="changeMode('light')"
-              v-else
-              />
+              <div class="flex items-center space-x-4">
+                <MoonIcon class="w-7 h-7 text-gray-600 cursor-pointer"
+                  @click="changeMode('dark')"
+                  v-if="theme === 'light'"
+                />
+                <SunIcon class="w-7 h-7 text-gray-300 cursor-pointer"
+                  @click="changeMode('light')"
+                v-else
+                />
+                <DropdownMenu />
+              </div>
           </div>
           <div class="dark:text-gray-300">
               <slot />
