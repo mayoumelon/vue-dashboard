@@ -3,6 +3,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import { MenuIcon, MoonIcon, SunIcon } from '@heroicons/vue/outline';
 import { debounce } from 'lodash';
 import DropdownMenu from './DropdownMenu.vue';
+import Sidebar from '../components/Sidebar.vue';
 
 const innerWidth = ref(window.innerWidth);
 const show = ref(innerWidth.value >= 1280 ? true : false);
@@ -58,7 +59,7 @@ onUnmounted(() => {
         transition
         duration-300
       " :class="{ '-translate-x-full': !show }">
-        サイドバー
+        <Sidebar />
       </div>
       <div 
         class="fixed xl:hidden inset-0 bg-gray-900 opacity-50 z-10"
