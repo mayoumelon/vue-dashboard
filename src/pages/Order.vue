@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+import Default from '../layouts/Default.vue';
+</script>
 <template>
-  <div>オーダー</div>
+  <Default>オーダー</Default>
 </template>

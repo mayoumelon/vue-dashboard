@@ -3,8 +3,14 @@ import Dashboard from '../pages/Dashboard.vue';
 import Profile from '../pages/Profile.vue';
 import Order from '../pages/Order.vue';
 import Product from '../pages/Product.vue';
+import SignUp from '../pages/SignUp.vue';
 
 const routes = [
+  {
+    path: '/signup',
+    name: 'SignUp',
+    component: SignUp,
+  },
   {
     path: '/',
     name: 'Dashboard',
