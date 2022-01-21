@@ -8,20 +8,19 @@ const email = ref('');
 const password = ref('');
 const error = ref('');
 
-const login = () => {
-  axios
-    .post('http://localhost:5000/api/users/login', {
+const login = async () => {
+  try {
+    const response = await axios.post('http://localhost:5000/api/users/login', {
       email: email.value,
       password: password.value,
-    })
-    .then((response) => {
-      console.log(response.data);
-      router.push('/');
-    })
-    .catch((err) => {
-      error.value = err.response.data;
     });
-}
+    const token = response.data.token;
+    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    router.push('/');
+  } catch (err) {
+    error.value = err.response.data;
+  }
+};
 </script>
 
 <template>

@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 
-const router = userRouter();
+const router = useRouter();
 const name = ref('');
 const email = ref('');
 const password = ref('');
