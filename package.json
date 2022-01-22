@@ -9,9 +9,11 @@
   "dependencies": {
     "@heroicons/vue": "^1.0.5",
     "axios": "^0.25.0",
+    "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
     "vue": "^3.2.25",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.12",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.0.0",

@@ -1,25 +1,27 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import axios from 'axios';
+import { useStore } from 'vuex';
 
+const store = useStore();
 const router = useRouter(); 
+
 const email = ref('');
 const password = ref('');
 const error = ref('');
 
 const login = async () => {
-  try {
-    const response = await axios.post('http://localhost:5000/api/users/login', {
+  store
+    .dispatch('user/login', {
       email: email.value,
       password: password.value,
+    })
+    .then(() => {
+      router.push('/');
+    })
+    .catch((err) => {
+      error.value = err.message;
     });
-    const token = response.data.token;
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    router.push('/');
-  } catch (err) {
-    error.value = err.response.data;
-  }
 };
 </script>
 

@@ -1,8 +1,10 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
 import axios from 'axios';
 
+const store = useStore();
 const router = useRouter();
 const name = ref('');
 const email = ref('');
@@ -16,9 +18,19 @@ const register = () => {
       email: email.value,
       password: password.value,
     })
-    .then((response) => {
-      console.log(response.data);
-      router.push('/');
+    .then(() => {
+      console.log('registered!');
+      store
+        .dispatch('user/login', {
+          email: email.value,
+          password: password.value,
+        })
+        .then(() => {
+          router.push('/');
+        })
+        .catch((err) => {
+          error.value = err.message;
+        });
     })
     .catch((err) => {
       error.value = err.response.data.message;

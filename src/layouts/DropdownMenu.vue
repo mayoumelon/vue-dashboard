@@ -1,8 +1,10 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue';
 import { UserIcon, LogoutIcon } from '@heroicons/vue/outline';
-import axios from 'axios';
+import { useStore } from 'vuex';
 import router from '../router';
+
+const store = useStore();
 
 const show = ref(false);
 const root = ref(null);
@@ -21,8 +23,9 @@ onMounted(() => document.addEventListener('click', clickOutside));
 onUnmounted(() => document.removeEventListener('click', clickOutside));
 
 const logout = () => {
-  axios.defaults.headers.common["Authorization"] = null;
-  router.push('/login');
+  store.dispatch('user/logout').then(() => {
+    router.push('/login');
+  });
 };
 </script>
 

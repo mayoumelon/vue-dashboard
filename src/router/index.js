@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { store } from '../store';
 import Dashboard from '../pages/Dashboard.vue';
 import Profile from '../pages/Profile.vue';
 import Order from '../pages/Order.vue';
@@ -51,11 +52,11 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   if (to.meta.requiresAuth) {
-    try {
-      await axios.get('http://localhost:5000/api/users/user');
-      next();
-    } catch {
+    if (!store.state.user.user) {
+      console.log(store.state.user.user);
       next('login');
+    } else {
+      next();
     }
   } else {
     next();
