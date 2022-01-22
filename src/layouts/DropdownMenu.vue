@@ -1,6 +1,10 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue';
 import { UserIcon, LogoutIcon } from '@heroicons/vue/outline';
+import { useStore } from 'vuex';
+import router from '../router';
+
+const store = useStore();
 
 const show = ref(false);
 const root = ref(null);
@@ -13,10 +17,16 @@ const clickOutside = (e) => {
   if (!root.value.contains(e.target) && show.value) {
     show.value = false;
   }
-}
+};
 
 onMounted(() => document.addEventListener('click', clickOutside));
 onUnmounted(() => document.removeEventListener('click', clickOutside));
+
+const logout = () => {
+  store.dispatch('user/logout').then(() => {
+    router.push('/login');
+  });
+};
 </script>
 
 <template>
@@ -63,10 +73,10 @@ onUnmounted(() => document.removeEventListener('click', clickOutside));
               dark:hover:text-blue-600
               p-2
             ">
-            <a href="/#" class="flex items-center space-x-2">
+            <div @click="logout" class="flex items-center space-x-2">
               <LogoutIcon class="w-5 h-5" />
               <span class="text-sm font-bold">ログアウト</span>
-            </a>
+            </div>
           </li>
         </ul>
       </div>

@@ -1,4 +1,11 @@
-<script setup></script>
+<script setup>
+import Default from '../layouts/Default.vue';
+import { computed } from 'vue';
+import { useStore } from 'vuex';
+
+const store = useStore();
+const user = computed(() => store.state.user.user);
+</script>
 <template>
-  <div>プロファイル</div>
+  <Default>プロファイル ユーザー情報:{{ user.name }}</Default>
 </template>
